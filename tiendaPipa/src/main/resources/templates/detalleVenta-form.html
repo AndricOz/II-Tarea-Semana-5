@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Detalle' : 'Nuevo Detalle'"></title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "Segoe UI", sans-serif; background: #f0f2f5; }
+        main { max-width: 520px; margin: 36px auto; padding: 0 20px; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h2 { color: #1a1a2e; margin-bottom: 1.5rem; font-size: 1.3rem; }
+        .campo { margin-bottom: 1.1rem; }
+        label { display: block; margin-bottom: 0.4rem; color: #333; font-size: 0.9rem; font-weight: 500; }
+        input[type="number"] {
+            width: 100%; padding: 0.7rem 1rem; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+        input:focus { border-color: #4a6cf7; }
+        .error { color: #e74c3c; font-size: 0.8rem; margin-top: 0.3rem; }
+        .acciones { display: flex; gap: 10px; margin-top: 1.4rem; }
+        .btn { padding: 0.75rem 1.4rem; border: none; border-radius: 8px;
+               font-size: 0.95rem; font-weight: 600; cursor: pointer;
+               text-decoration: none; display: inline-block; }
+        .btn-guardar { background: #4a6cf7; color: white; }
+        .btn-guardar:hover { background: #3a5ce4; }
+        .btn-volver { background: #6c757d; color: white; }
+        .btn-volver:hover { background: #565e64; }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main>
+    <div class="card">
+        <h2 th:text="${modoEdicion} ? 'Editar Detalle de Venta' : 'Nuevo Detalle de Venta'"></h2>
+
+        <form th:action="${modoEdicion} ? @{/tienda/detallesVentas/actualizar/{id}(id=${detalleVenta.codigoDetalleVenta})} : @{/tienda/detallesVentas/guardar}"
+              th:object="${detalleVenta}" method="post">
+
+            <div class="campo">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" th:field="*{cantidad}" min="1" />
+                <div class="error" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="subtotal">Subtotal (Q)</label>
+                <input type="number" id="subtotal" th:field="*{subtotal}" step="0.01" min="0" />
+                <div class="error" th:if="${#fields.hasErrors('subtotal')}" th:errors="*{subtotal}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="productosCodigoProducto">ID Producto</label>
+                <input type="number" id="productosCodigoProducto" th:field="*{productosCodigoProducto}" min="1" />
+                <div class="error" th:if="${#fields.hasErrors('productosCodigoProducto')}" th:errors="*{productosCodigoProducto}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="ventasCodigoVenta">ID Venta</label>
+                <input type="number" id="ventasCodigoVenta" th:field="*{ventasCodigoVenta}" min="1" />
+                <div class="error" th:if="${#fields.hasErrors('ventasCodigoVenta')}" th:errors="*{ventasCodigoVenta}"></div>
+            </div>
+
+            <div class="acciones">
+                <button type="submit" class="btn btn-guardar"
+                        th:text="${modoEdicion} ? 'Actualizar' : 'Guardar'"></button>
+                <a th:href="@{/tienda/detallesVentas}" class="btn btn-volver">Volver</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

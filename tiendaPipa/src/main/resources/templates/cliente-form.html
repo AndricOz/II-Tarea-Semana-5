@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Cliente' : 'Nuevo Cliente'"></title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "Segoe UI", sans-serif; background: #f0f2f5; }
+        main { max-width: 520px; margin: 36px auto; padding: 0 20px; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h2 { color: #1a1a2e; margin-bottom: 1.5rem; font-size: 1.3rem; }
+        .campo { margin-bottom: 1.1rem; }
+        label { display: block; margin-bottom: 0.4rem; color: #333; font-size: 0.9rem; font-weight: 500; }
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%; padding: 0.7rem 1rem; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+        input:focus, select:focus { border-color: #4a6cf7; }
+        .error { color: #e74c3c; font-size: 0.8rem; margin-top: 0.3rem; }
+        .hint-field { font-size: 0.78rem; color: #888; margin-top: 0.25rem; }
+        .acciones { display: flex; gap: 10px; margin-top: 1.4rem; }
+        .btn { padding: 0.75rem 1.4rem; border: none; border-radius: 8px;
+               font-size: 0.95rem; font-weight: 600; cursor: pointer;
+               text-decoration: none; display: inline-block; }
+        .btn-guardar { background: #4a6cf7; color: white; }
+        .btn-guardar:hover { background: #3a5ce4; }
+        .btn-volver { background: #6c757d; color: white; }
+        .btn-volver:hover { background: #565e64; }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main>
+    <div class="card">
+        <h2 th:text="${modoEdicion} ? 'Editar Cliente' : 'Nuevo Cliente'"></h2>
+
+        <form th:action="${modoEdicion} ? @{/tienda/clientes/actualizar/{id}(id=${cliente.dpiCliente})} : @{/tienda/clientes/guardar}"
+              th:object="${cliente}" method="post">
+
+            <div class="campo">
+                <label for="nombreCliente">Nombre</label>
+                <input type="text" id="nombreCliente" th:field="*{nombreCliente}" placeholder="ej: juan" />
+                <div class="error" th:if="${#fields.hasErrors('nombreCliente')}" th:errors="*{nombreCliente}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="apellidoCliente">Apellido</label>
+                <input type="text" id="apellidoCliente" th:field="*{apellidoCliente}" placeholder="ej: Perez" />
+                <div class="error" th:if="${#fields.hasErrors('apellidoCliente')}" th:errors="*{apellidoCliente}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="direccion">Direccion</label>
+                <input type="text" id="direccion" th:field="*{direccion}" placeholder="ej: Ciudad Guatamala, Zona 1, 1 Av, 1 Calle" />
+                <div class="error" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="estado">Estado</label>
+                <select id="estado" th:field="*{estado}">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+
+            <div class="acciones">
+                <button type="submit" class="btn btn-guardar"
+                        th:text="${modoEdicion} ? 'Actualizar' : 'Guardar'"></button>
+                <a th:href="@{/tienda/clientes}" class="btn btn-volver">Volver</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

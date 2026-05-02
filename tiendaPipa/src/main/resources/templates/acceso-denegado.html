@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Denegado</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 460px;
+            text-align: center;
+        }
+        .icono { font-size: 4rem; margin-bottom: 1rem; }
+        h2 { color: #c0392b; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        p { color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.8rem;
+            background: #4a6cf7;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+            margin: 0.3rem;
+        }
+        .btn:hover { background: #3a5ce4; }
+        .btn-gris { background: #6c757d; }
+        .btn-gris:hover { background: #565e64; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="icono">🚫</div>
+    <h2>Acceso Denegado</h2>
+    <p>
+        No tienes los permisos necesarios para acceder a esta sección.<br>
+        Si crees que esto es un error, contacta al administrador.
+
+        PD: Por favor intente que no tubiera errores, verifica que no seas tu el problema
+    </p>
+    <a th:href="@{/tienda/productos}" class="btn">Ir al Inicio</a>
+    <a th:href="@{/logout}" class="btn btn-gris">Cerrar Sesión</a>
+</div>
+</body>
+</html>

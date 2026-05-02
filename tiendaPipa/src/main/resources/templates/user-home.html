@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Usuario — Tienda Pipa</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
+        header {
+            background: #4a6cf7;
+            color: white;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.2rem; }
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 6px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .logout-btn:hover { background: rgba(255,255,255,0.35); }
+        main { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-bottom: 20px;
+        }
+        .card h2 { color: #333; margin-bottom: 8px; }
+        .card p  { color: #6c757d; margin-bottom: 20px; }
+        .btn {
+            display: inline-block;
+            padding: 10px 22px;
+            background: #4a6cf7;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn:hover { background: #3a5ce4; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #cce5ff;
+            color: #004085;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Tienda Pipa <span class="badge">USER</span></h1>
+    <a th:href="@{/logout}" class="logout-btn">Cerrar sesión</a>
+</header>
+
+<main>
+    <div class="card">
+        <h2>Bienvenido, usuario estándar</h2>
+        <p>Desde aquí puedes consultar el catálogo de productos disponibles.</p>
+        <a th:href="@{/tienda/productos}" class="btn">Ver Productos</a>
+    </div>
+</main>
+
+</body>
+</html>
